@@ -1,0 +1,147 @@
+# sway config file
+
+# set leader key (Mod4 logo key, Mod1 for Alt)
+set $mod Mod4
+
+# set preferred terminal
+set $term alacritty
+
+# set application launcher
+set $menu wofi --show drun -i | xargs swaymsg exec --
+
+# set color scheme
+include ~/.config/sway/colorscheme
+
+# idle management
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
+
+# start a terminal
+bindsym $mod+Return exec $term
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start your launcher
+bindsym $mod+d exec $menu
+
+# move (non-)floating windows with $mod+left/right mouse button
+floating_modifier $mod normal
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# exit sway
+bindsym $mod+Shift+e exec swaynag \
+    -t warning \
+    -m 'What do you want to do?' \
+    -b 'Logout' 'swaymsg exit' \
+    -b 'Poweroff' 'systemctl poweroff' \
+    -b 'Reboot' 'systemctl reboot'
+
+# move focus around
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# change "split" mode
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# switch current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+
+# swap focus between tiling and floating area
+bindsym $mod+space focus mode_toggle
+
+# move focus to parent container
+bindsym $mod+a focus parent
+
+# Note: Sway has a "scratchpad", which is a bag of holding for windows. You
+# can send windows there and them back later.
+# move focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# show next scratchpad or hide focussed scratchpad window
+bindsym $mod+minus scratchpad show
+
+# resize containers
+mode "resize" {
+    # shrink/grow height/width
+    bindsym h resize shrink width 10px
+    bindsym j resize grow height 10px
+    bindsym k resize shrink height 10px
+    bindsym l resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    status_command status_bar
+    position top
+    pango_markup enabled
+    font pango: Source Code Pro, Awesome 11
+
+    # Basic color configuration using the Base16 variables for status bar
+    colors {
+        background $base00
+        separator  $base01
+        statusline $base05
+    
+        # State             Border  BG      Text
+        focused_workspace   $base05 $base0D $base00
+        active_workspace    $base05 $base03 $base00
+        inactive_workspace  $base03 $base01 $base05
+        urgent_workspace    $base08 $base08 $base00
+        binding_mode        $base00 $base0A $base00
+    }
+}
+
+include /etc/sway/config.d/*
+include ~/.config/sway/config.d/*

@@ -1,0 +1,17 @@
+# generic
+output * bg ~/.config/sway/assets/background_1920_1080.png fill
+
+# laptop @home
+output eDP-1 bg ~/.config/sway/assets/background_1920_1080.png fill
+output eDP-1 pos 3440 0 res 1920x1080
+
+bindswitch --reload --locked lid:on output eDP-1 disable
+bindswitch --reload --locked lid:off output eDP-1 enable
+
+# samsung display @home
+output DP-3 bg ~/.config/sway/assets/background_3440x1440.png fill
+output DP-3 pos 0 0 res 3440x1440
+focus output DP-3
+
+# beamer
+# output HDMI-A-1 pos 1920 0 res 1280x720
