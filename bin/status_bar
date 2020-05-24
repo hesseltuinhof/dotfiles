@@ -1,0 +1,109 @@
+#!/usr/bin/env sh
+
+### config
+
+# specify network interfaces
+wired_interface="enp0s31f6"
+wireless_interface="wlp4s0"
+
+# specify battery and AC interfaces
+battery_interface="BAT0"
+ac_interface="AC"
+
+# specify backlight interface
+backlight_interface="intel_backlight"
+
+# specify seperator
+sep=" · "
+
+# set colors
+red="#FF5555"
+green="#50FA7B"
+
+while true
+do
+  ### time
+  time=$(date +"%A %Y-%m-%d %H:%M")
+  time="${time} $(date -u +"(%H:%M UTC)")"
+
+  ### network
+  wired_status=$(\
+    nmcli -f GENERAL.STATE device show ${wired_interface} 2>&1 \
+    | grep -oP "(?<=\()(\w+)")
+
+  wireless_status=$(\
+      nmcli -f GENERAL.STATE device show ${wireless_interface} 2>&1 \
+      | grep -oP "(?<=\()(\w+)")
+
+  if [ "${wireless_status}" == "connected" ]; then
+    wireless=" $(\
+      nmcli -t -f active,ssid,bars device wifi \
+      | grep "^yes" \
+      | cut -d: -f2,3 --output-delimiter=" ")"
+  else
+    wireless="<span foreground='${red}'> </span>"
+  fi
+  if [ "${wired_status}" == "connected" ]; then
+    wired="${sep} "
+  else
+    wired=""
+    #wired="${sep}<span foreground='${red}'> </span>"
+  fi
+  network="${wireless}${wired}"
+
+  ### bluetooth
+  if [ "$(btmgmt info | wc -l)" != 1 ]; then
+    bluetooth="${sep}"
+  else
+    bluetooth=""
+  fi
+
+  ### power
+  ac_path="/sys/class/power_supply/${ac_interface}"
+  battery_path="/sys/class/power_supply/${battery_interface}"
+  if [ -d "${ac_path}" ]; then
+    if [ "$(cat ${ac_path}/online)" -eq 1 ]; then
+      # AC active
+      power=" "
+    else
+      if [ "$(cat ${batter_path}/status)" == "Charging" ]; then
+        # battery charging
+        power="<span foreground='${green}'> </span>"
+      else
+        # battery active
+        power=" "
+      fi
+    fi
+    power="${power}$(cat ${battery_path}/capacity)%%"
+  else
+    power="<span foreground='${red}'> </span>"
+  fi
+  
+  ### audio
+  audio_unparsed=$(\
+    amixer -D pulse get Master \
+    | grep -oP "(?<=\[)(\d+%|on|off)(?=\])" \
+    | head -n 2)
+  audio_volume="$(sed -n 1p <<< ${audio_unparsed})%"
+  audio_status="$(sed -n 2p <<< ${audio_unparsed})"
+  if [ "${audio_status}" == "off" ]; then
+   audio=" "
+ else
+   audio=" "
+  fi
+  audio="${audio}${audio_volume}"
+  
+  ### backlight
+  backlight_path="/sys/class/backlight/${backlight_interface}"
+  if [ -d "${backlight_path}" ]; then
+    brightness_actual=$(cat "${backlight_path}/actual_brightness")
+    brightness_max=$(cat "${backlight_path}/max_brightness")
+    backlight=" $(( brightness_actual * 100 / brightness_max))%%"
+  else
+    backlight="<span foreground='${red}'> </span>"
+  fi
+
+  ### status output
+  printf "${bluetooth}${backlight}${sep}${audio}${sep}${network}${sep}${power}${sep}${time}\n"
+  sleep 10
+done
