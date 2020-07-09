@@ -121,6 +121,15 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# take screenshot
+bindsym Print exec grim ~/pictures/screenshots/$(date +"%Y%m%d_%H%M%S.png")
+bindsym $mod+Print exec grim -g \"$(slurp)" ~/pictures/screenshots/$(date +"%Y%m%d_%H%M%S.png")
+bindsym $mod+Shift+Print exec grim -g \"$(slurp)" - | wl-copy
+
+# dismiss notifications
+bindsym $mod+n exec makoctl dismiss
+bindsym $mod+Shift+n exec makoctl dismiss -a
+
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     status_command status_bar
