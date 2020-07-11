@@ -1,0 +1,28 @@
+font=Source Code Pro 11
+
+ignore-timeout=1
+default-timeout=0
+max-visible=5
+
+# blue variant
+#background-color=#62d6e8
+#text-color=#282936
+#border-color=#e9e9f4
+
+# pink variant
+#background-color=#ea51b2
+#text-color=#282936
+#border-color=#ea51b2
+
+# yellow variant
+background-color=#f4f99d
+text-color=#282936
+border-color=#e7f127
+
+[urgency=high]
+background-color=#ff5555
+text-color=#282936
+border-color=#ff0000
+
+[hidden]
+format=+%h more...
