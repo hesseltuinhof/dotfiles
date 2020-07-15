@@ -74,7 +74,17 @@ function fish_prompt --description 'Write out the prompt'
     echo -n (prompt_pwd)
     set_color normal
 
-    printf '%s' (fish_vcs_prompt)
+    # check if git repo at user home directory exists and if true,
+    # skip git prompt if it's state is clean
+    set -l repo_parent_dir (command git rev-parse --show-toplevel 2>/dev/null)
+    if test -n repo_parent_dir
+            and test "$repo_parent_dir" = "/home/"(whoami)
+            and test (git status --porcelain | wc -l) -eq 0
+            and test (git status -sb | grep -cE "ahead|behind") -eq 0
+        # do nothing
+    else
+        printf '%s' (fish_vcs_prompt)
+    end
 
     set -l pipestatus_string (__fish_print_pipestatus "[" "] " "|" (set_color $fish_color_status) (set_color --bold $fish_color_status) $last_pipestatus)
     echo -n $pipestatus_string
