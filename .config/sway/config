@@ -130,6 +130,15 @@ bindsym $mod+Shift+Print exec grim -g \"$(slurp)" - | wl-copy
 bindsym $mod+n exec makoctl dismiss
 bindsym $mod+Shift+n exec makoctl dismiss -a
 
+#
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl -d intel_backlight set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl -d intel_backlight set +5%
+
+
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     status_command status_bar
