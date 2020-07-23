@@ -1,0 +1,6 @@
+# pyenv
+.python-version
+
+# python
+.ipynb_checkpoints
+__pycache__/
