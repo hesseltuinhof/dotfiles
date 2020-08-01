@@ -68,12 +68,13 @@ window:
     y: 2
 
   decorations: none
+  dynamic_title: true
 
 scrolling:
   history: 10000
   multiplier: 5
 
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
   color: '#ffffff'
@@ -85,8 +86,6 @@ selection:
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
-
-dynamic_title: true
 
 cursor:
   style: Block
