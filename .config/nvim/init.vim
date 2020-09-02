@@ -174,7 +174,7 @@ let g:lightline = {
 " TODO: Think about putting language specific stuff to ftplugin/python.vim e.g.
 " see also: https://codeinthehole.com/tips/using-black-and-isort-with-vim/
 let g:ale_fixers = {
-    \   'python': ['isort']
+    \   'python': ['isort', 'yapf']
     \}
 " only run fixers on keymap
 let b:ale_fix_on_save = 0
