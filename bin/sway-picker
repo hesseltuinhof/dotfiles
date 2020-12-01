@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+if [ -e /dev/dri/card1 ]; then
+  intel_gpu_id=$(udevadm info -a -n /dev/dri/card1 | grep boot_vga | rev | cut -c 2)
+  export WLR_DRM_DEVICES="/dev/dri/card${intel_gpu_id}"
+fi
+
+if [ -z $WLR_DRM_DEVICES ]; then
+  exec sway "$@"
+else
+  exec sway --my-next-gpu-wont-be-nvidia "$@"
+fi
