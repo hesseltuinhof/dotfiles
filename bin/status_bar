@@ -63,16 +63,16 @@ do
   battery_path="/sys/class/power_supply/${battery_interface}"
   if [ -d "${ac_path}" ]; then
     if [ "$(cat ${ac_path}/online)" -eq 1 ]; then
-      # AC active
-      power=" "
-    else
-      if [ "$(cat ${batter_path}/status)" == "Charging" ]; then
-        # battery charging
+      if [ "$(cat ${battery_path}/status)" == "Charging" ]; then
+        # AC active + battery charging
         power="<span foreground='${green}'> </span>"
       else
-        # battery active
-        power=" "
+        # AC active
+        power=" "
       fi
+    else
+      # battery active
+      power=" "
     fi
     power="${power}$(cat ${battery_path}/capacity)%%"
   else
