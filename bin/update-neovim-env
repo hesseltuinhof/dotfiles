@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+if [ "$PYENV_VERSION" != "neovim" ];then
+  echo "Neovim virtual env not set. Activate with 'pyenv shell neovim' or similar."
+  exit 1
+fi
+
+pkgs="flake8|isort|jedi|mypy|pynvim|yapf"
+
+echo "Upgrading neovim virtual env..."
+
+pip install --upgrade pip
+pip install --upgrade setuptools
+
+echo $pkgs | tr "|" '\n' | while read pkg; do
+  pip install --upgrade $pkg
+done
