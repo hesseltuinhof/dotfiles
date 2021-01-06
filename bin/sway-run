@@ -8,7 +8,7 @@ export XKB_DEFAULT_OPTIONS=caps:super
 export MOZ_ENABLE_WAYLAND=1
 export _JAVA_AWT_WM_NONREPARENTING=1
 export NO_AT_BRIDGE=1
-export GDK_BACKEND=wayland
+#export GDK_BACKEND=wayland
 export SDL_VIDEODRIVER=wayland
 
 eval $(gnome-keyring-daemon -s)
