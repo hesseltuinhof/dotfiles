@@ -175,14 +175,15 @@ let g:lightline = {
 " TODO: Think about putting language specific stuff to ftplugin/python.vim e.g.
 " see also: https://codeinthehole.com/tips/using-black-and-isort-with-vim/
 let g:ale_fixers = {
-    \   'python': ['isort', 'yapf']
-    \}
+    \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \ 'python': ['isort', 'yapf']
+    \ }
 " only run fixers on keymap
 let b:ale_fix_on_save = 0
 "
 " specify linters
 let g:ale_linters = {
-    \ 'python': ['flake8'],
+    \ 'python': ['flake8', 'mypy'],
     \ 'go': ['gofmt', 'golint', 'go vet'],
     \ 'sh': ['shellcheck'],
     \ }
