@@ -24,6 +24,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " themes
 Plug 'freeo/vim-kalisi'
+Plug 'gkapfham/vim-vitamin-onec'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
