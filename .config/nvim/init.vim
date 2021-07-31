@@ -38,7 +38,7 @@ colorscheme dracula
 " >> Basic Settings <<
 
 " minimal working config
-set relativenumber              " Show line numbers
+set number relativenumber       " Show hybrid line numbers
 set linebreak                   " Break lines at word (requires Wrap lines)
 set showbreak=+++               " Wrap-broken line prefix
 set textwidth=120               " Line wrap (number of cols)
