@@ -5,6 +5,8 @@
 	default = simple
 [pull]
 	rebase = true
+[merge]
+    merge = only
 [alias]
 	log-simple = log --pretty=format:\"%C(yellow)%h %C(cyan)%<(12,trunc)%an %C(green)%>(11,trunc)%ar%C(auto)%d %Creset%s\"
 	log-graph = log --graph --pretty=format:\"%C(yellow)%h %C(cyan)%an%C(auto)%d %Creset%s\" --all
