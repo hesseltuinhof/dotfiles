@@ -15,3 +15,6 @@ bindswitch --reload --locked lid:off output eDP-1 enable
 
 # beamer
 # output HDMI-A-1 pos 1920 0 res 1280x720
+
+# dell display @oana:
+output "Dell Inc. DELL P2419HC 6K2FL03" pos -1920 0 res 1920x1080
