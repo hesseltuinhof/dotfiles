@@ -18,3 +18,9 @@ fish_add_path $PYENV_ROOT/bin
 
 pyenv init - | source
 pyenv virtualenv-init - | source
+
+# patch pyenv local to support init of pyright config
+# note: patching must happen here because pyenv init defines a pyenv function
+function pyenv --wrap='pyenv'
+    __pyenv_wrapper $argv
+end
