@@ -4,13 +4,17 @@ set fish_greeting
 set -gx EDITOR nvim
 set -gx LANG en_US.UTF-8
 
+fish_add_path ~/bin
+fish_add_path /usr/local/bin
+fish_add_path /usr/bin
+fish_add_path /usr/local/sbin
+fish_add_path /usr/bin/site_perl
+fish_add_path /usr/bin/vendor_perl
+fish_add_path /usr/bin/core_perl
 
-set -gx PATH ~/bin /usr/local/bin /usr/bin /usr/local/sbin
-set -gx PATH $PATH usr/bin/site_perl /usr/bin/vendor_perl /usr/bin/core_perl
-
-set -gx PIP_REQUIRE_VIRTUALENV true
-set -gx PYENV_ROOT $HOME/.pyenv
-set -gx PATH $PYENV_ROOT/bin $PATH
+set -Ux PIP_REQUIRE_VIRTUALENV true
+set -Ux PYENV_ROOT $HOME/.pyenv
+fish_add_path $PYENV_ROOT/bin
 
 pyenv init --path | source
 pyenv init - | source
