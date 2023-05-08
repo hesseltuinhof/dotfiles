@@ -131,6 +131,9 @@ bindsym $mod+Shift+Print exec grim -g \"$(slurp)" - | wl-copy
 bindsym $mod+n exec makoctl dismiss
 bindsym $mod+Shift+n exec makoctl dismiss -a
 
+# special windows
+no_focus [title="^Peek preview$"]
+
 # special key bindings
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
