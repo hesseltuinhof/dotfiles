@@ -2,13 +2,21 @@
 output * bg ~/.config/sway/assets/background_1920_1080.png fill
 
 # samsung display @home
-output "Samsung Electric Company CF791 HTRJ700407" bg ~/.config/sway/assets/background_3440x1440.png fill
-output "Samsung Electric Company CF791 HTRJ700407" pos 1920 0 res 3440x1440
-focus output "Samsung Electric Company CF791 HTRJ700407"
+#output "Samsung Electric Company CF791 HTRJ700407" bg ~/.config/sway/assets/background_3440x1440.png fill
+#output "Samsung Electric Company CF791 HTRJ700407" pos 1920 0 res 3440x1440
+#focus output "Samsung Electric Company CF791 HTRJ700407"
+## laptop left of display
+#output eDP-1 pos 2560 0 res 1920x1080
+
+# small samsung display @home
+output "Samsung Electric Company U28E590 HNMR500465" bg ~/.config/sway/assets/background_3440x1440.png fill
+output "Samsung Electric Company U28E590 HNMR500465" pos 0 0 res 2560x1440
+focus output "Samsung Electric Company U28E590 HNMR500465"
+# laptop right of display
+output eDP-1 pos 0 0 res 1920x1080
 
 # laptop @home
 output eDP-1 bg ~/.config/sway/assets/background_1920_1080.png fill
-output eDP-1 pos 0 0 res 1920x1080
 
 bindswitch --reload --locked lid:on output eDP-1 disable
 bindswitch --reload --locked lid:off output eDP-1 enable
