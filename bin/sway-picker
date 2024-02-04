@@ -8,5 +8,5 @@ fi
 if [ -z $WLR_DRM_DEVICES ]; then
   exec sway "$@"
 else
-  exec sway --my-next-gpu-wont-be-nvidia "$@"
+  exec sway --unsupported-gpu "$@"
 fi
