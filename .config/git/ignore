@@ -1,6 +1,13 @@
 # pyenv
 .python-version
 
+# pyright
+pyrightconfig.json
+
 # python
 .ipynb_checkpoints
 __pycache__/
+
+# markdown
+TODO.md
+todo.md
