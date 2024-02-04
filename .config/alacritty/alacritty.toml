@@ -120,18 +120,6 @@ hide_when_typing = false
 action = "PasteSelection"
 mouse = "Middle"
 
-[mouse.double_click]
-threshold = 300
-
-[mouse.hints]
-modifiers = "Control"
-
-[mouse.hints.launcher]
-program = "xdg-open"
-
-[mouse.triple_click]
-threshold = 300
-
 [scrolling]
 history = 10000
 multiplier = 5
