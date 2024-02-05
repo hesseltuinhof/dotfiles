@@ -1,3 +1,2 @@
 R_HOME_USER = ${HOME}/.r
-R_PROFILE_USER = ${HOME}/.config/r/.Rprofile
 R_LIBS_USER = ${HOME}/.r/library
