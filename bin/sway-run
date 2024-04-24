@@ -11,8 +11,7 @@ export NO_AT_BRIDGE=1
 #export GDK_BACKEND=wayland
 export SDL_VIDEODRIVER=wayland
 
-eval $(gnome-keyring-daemon -s)
-export SSH_AUTH_SOCK
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
 
 # user directories
 export XDG_DESKTOP_DIR="$HOME"
